@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Delete Category{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-6">
+
+    <div class="card app-card p-4 border border-danger-subtle">
+
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h1 class="h5 mb-0 text-danger">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>Delete Category
+        </h1>
+
+        <a class="btn btn-outline-light btn-sm" href="{% url 'category_list' %}">
+          <i class="bi bi-x-circle me-1"></i>Cancel
+        </a>
+      </div>
+
+      <p class="text-muted-2 mb-3">
+        You are about to delete this category:
+      </p>
+
+      <div class="p-3 rounded-3 border" style="background: rgba(15,23,42,0.03); border-color: rgba(15,23,42,0.10) !important;">
+        <div class="fw-semibold">
+          <i class="bi bi-tag me-2"></i>{{ object.name }}
+        </div>
+      </div>
+
+      <div class="alert alert-warning small mt-3 mb-0">
+        <i class="bi bi-info-circle me-1"></i>
+        Existing transactions will remain intact.
+        Their category field will become empty (because of <b>SET_NULL</b>).
+      </div>
+
+      <form method="post" class="d-flex justify-content-end gap-2 mt-4">
+        {% csrf_token %}
+
+        <a class="btn btn-outline-light" href="{% url 'category_list' %}">
+          <i class="bi bi-arrow-left me-1"></i>Go Back
+        </a>
+
+        <button type="submit" class="btn btn-danger">
+          <i class="bi bi-trash me-1"></i>Yes, Delete
+        </button>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}

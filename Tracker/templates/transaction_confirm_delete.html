@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load money %}
+
+{% block title %}Delete Transaction{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-6">
+
+    <div class="card app-card p-4 border border-danger-subtle">
+
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h1 class="h5 mb-0 text-danger">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>Delete Transaction
+        </h1>
+
+        <a class="btn btn-outline-light btn-sm" href="{% url 'transaction_list' %}">
+          <i class="bi bi-x-circle me-1"></i>Cancel
+        </a>
+      </div>
+
+      <p class="text-muted-2 mb-3">
+        This will <b>hide</b> the transaction from your active list (soft delete). You can later implement restore if needed.
+      </p>
+
+      <div class="card app-card p-3 mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="small text-muted-2">Date</div>
+            <div class="fw-semibold">{{ object.date }}</div>
+
+            <div class="small text-muted-2 mt-2">Wallet</div>
+            <div class="fw-semibold">
+              <i class="bi bi-wallet2 me-2"></i>{{ object.wallet.name }}
+            </div>
+          </div>
+
+          <div class="text-end">
+            {% if object.t_type == "EXPENSE" %}
+              <span class="badge text-bg-warning">
+                <i class="bi bi-arrow-up-right-circle me-1"></i>Expense
+              </span>
+              <div class="fw-semibold mt-2 text-danger">{{ object.amount|kes }}</div>
+            {% else %}
+              <span class="badge text-bg-success">
+                <i class="bi bi-arrow-down-left-circle me-1"></i>Income
+              </span>
+              <div class="fw-semibold mt-2 text-success">{{ object.amount|kes }}</div>
+            {% endif %}
+
+            <div class="small text-muted-2 mt-2">
+              Category: {{ object.category|default:"—" }}
+            </div>
+          </div>
+        </div>
+
+        {% if object.note %}
+          <div class="mt-3 small text-muted-2">
+            <i class="bi bi-chat-left-text me-1"></i>{{ object.note }}
+          </div>
+        {% endif %}
+      </div>
+
+      <form method="post" class="d-flex justify-content-end gap-2">
+        {% csrf_token %}
+
+        <a class="btn btn-outline-light" href="{% url 'transaction_list' %}">
+          <i class="bi bi-arrow-left me-1"></i>Go Back
+        </a>
+
+        <button type="submit" class="btn btn-danger">
+          <i class="bi bi-trash me-1"></i>Yes, Delete
+        </button>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}

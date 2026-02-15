@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load money %}
+
+{% block title %}Transaction Detail{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-7">
+
+    <div class="card app-card p-4">
+
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h4 mb-0">
+          <i class="bi bi-receipt me-2"></i>Transaction Detail
+        </h1>
+
+        <a class="btn btn-outline-light btn-sm" href="{% url 'transaction_list' %}">
+          <i class="bi bi-arrow-left me-1"></i>Back
+        </a>
+      </div>
+
+      <div class="border-top pt-3"></div>
+
+      <!-- Type + Amount Highlight -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          {% if t.t_type == "EXPENSE" %}
+            <span class="badge text-bg-warning fs-6">
+              <i class="bi bi-arrow-up-right-circle me-1"></i>Expense
+            </span>
+          {% else %}
+            <span class="badge text-bg-success fs-6">
+              <i class="bi bi-arrow-down-left-circle me-1"></i>Income
+            </span>
+          {% endif %}
+        </div>
+
+        <div class="h4 fw-semibold mb-0
+          {% if t.t_type == 'EXPENSE' %} text-danger {% else %} text-success {% endif %}">
+          {{ t.amount|kes }}
+        </div>
+      </div>
+
+      <!-- Details Table -->
+      <div class="table-responsive">
+        <table class="table app-table table-sm align-middle mb-0">
+          <tbody>
+            <tr>
+              <th class="text-muted-2" style="width: 160px;">Wallet</th>
+              <td>
+                <i class="bi bi-wallet2 me-2"></i>
+                {{ t.wallet.name }}
+              </td>
+            </tr>
+
+            <tr>
+              <th class="text-muted-2">Date</th>
+              <td>{{ t.date }}</td>
+            </tr>
+
+            <tr>
+              <th class="text-muted-2">Category</th>
+              <td>{{ t.category|default:"—" }}</td>
+            </tr>
+
+            <tr>
+              <th class="text-muted-2">Note</th>
+              <td>
+                {% if t.note %}
+                  {{ t.note }}
+                {% else %}
+                  <span class="text-muted-2">No note added.</span>
+                {% endif %}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="d-flex justify-content-end gap-2 mt-4">
+        <a class="btn btn-outline-light" href="{% url 'transaction_update' t.pk %}">
+          <i class="bi bi-pencil me-1"></i>Edit
+        </a>
+
+        <a class="btn btn-outline-danger" href="{% url 'transaction_delete' t.pk %}">
+          <i class="bi bi-trash me-1"></i>Delete
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}

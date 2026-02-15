@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if form.instance.pk %}Edit Category{% else %}New Category{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-6">
+
+    <div class="card app-card p-4">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h1 class="h4 mb-0">
+          {% if form.instance.pk %}
+            <i class="bi bi-pencil-square me-2"></i>Edit Category
+          {% else %}
+            <i class="bi bi-plus-circle me-2"></i>New Category
+          {% endif %}
+        </h1>
+
+        <a class="btn btn-outline-light btn-sm" href="{% url 'category_list' %}">
+          <i class="bi bi-arrow-left me-1"></i>Back
+        </a>
+      </div>
+
+      <div class="border-top pt-3"></div>
+
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger mb-3">
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label class="form-label small text-muted-2">Category Name</label>
+          {{ form.name }}
+
+          {% if form.name.errors %}
+            <div class="text-danger small mt-1">
+              {{ form.name.errors }}
+            </div>
+          {% endif %}
+
+          <div class="small text-muted-2 mt-1">
+            Examples: Food, Rent, Salary, Transport
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <a href="{% url 'category_list' %}" class="btn btn-outline-light">
+            <i class="bi bi-x-circle me-1"></i>Cancel
+          </a>
+
+          <button type="submit" class="btn btn-accent">
+            <i class="bi bi-check-circle me-1"></i>
+            {% if form.instance.pk %}Update{% else %}Save{% endif %}
+          </button>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}

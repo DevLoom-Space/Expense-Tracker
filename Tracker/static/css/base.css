@@ -1,0 +1,333 @@
+:root{
+  /* Clean fintech light theme */
+  --app-bg: #f7f9fc;            /* soft light background */
+  --surface: #ffffff;           /* cards */
+  --surface-2: #f3f6fb;         /* soft sections */
+  --border: rgba(15, 23, 42, 0.12);
+
+  --text: #0f172a;              /* slate-900 */
+  --muted: #64748b;             /* slate-500 */
+
+  --nav-bg: rgba(255,255,255,0.88);
+  --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+
+  /* Accents */
+  --accent: #16a34a;            /* emerald-600 (primary action) */
+  --accent-2: #0ea5e9;          /* sky-500 (secondary) */
+  --danger: #dc2626;            /* red-600 */
+  --warning: #f59e0b;           /* amber-500 */
+
+  /* UI polish */
+  --radius: 18px;
+  --radius-sm: 12px;
+  --ring: 0 0 0 .25rem rgba(22,163,74,.18); /* focus ring */
+  --ring-blue: 0 0 0 .25rem rgba(14,165,233,.18);
+}
+
+/* =============== */
+/* Base / Layout   */
+/* =============== */
+
+html, body { height: 100%; }
+
+.app-bg{
+  background:
+    radial-gradient(900px 500px at 10% 0%, rgba(14,165,233,0.12), transparent 70%),
+    radial-gradient(900px 500px at 90% 10%, rgba(22,163,74,0.10), transparent 70%),
+    linear-gradient(180deg, var(--app-bg), #ffffff);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+main.container{
+  max-width: 1140px; /* feels pro */
+}
+
+.app-title{
+  letter-spacing: .2px;
+}
+
+/* =============== */
+/* Navbar          */
+/* =============== */
+
+.app-nav{
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+}
+
+.navbar .navbar-brand{
+  color: var(--text) !important;
+}
+
+.navbar .nav-link{
+  color: rgba(15,23,42,0.72) !important;
+  border-radius: var(--radius-sm);
+  padding: .45rem .7rem;
+  transition: background .15s ease, color .15s ease, transform .15s ease;
+}
+
+.navbar .nav-link:hover{
+  color: var(--text) !important;
+  background: rgba(15,23,42,0.06);
+}
+
+.navbar .nav-link.active{
+  color: var(--accent) !important;
+  background: rgba(22,163,74,0.12);
+  border: 1px solid rgba(22,163,74,0.22);
+}
+
+/* Navbar buttons on light */
+.navbar .btn-light{
+  background: rgba(15,23,42,0.06) !important;
+  border-color: rgba(15,23,42,0.12) !important;
+  color: rgba(15,23,42,0.86) !important;
+}
+.navbar .btn-light:hover{
+  background: rgba(15,23,42,0.10) !important;
+}
+
+/* =============== */
+/* Cards / Surfaces*/
+/* =============== */
+
+.card.app-card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card.app-card:hover{
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.10);
+}
+
+/* Subtle separators */
+hr.border-secondary{
+  opacity: .15;
+}
+
+/* =============== */
+/* Typography      */
+/* =============== */
+
+.text-muted-2{ color: var(--muted); }
+
+h1, h2, h3{
+  color: var(--text);
+}
+
+/* =============== */
+/* Buttons         */
+/* =============== */
+
+.btn{
+  border-radius: 12px;
+  transition: transform .08s ease, filter .15s ease, background .15s ease;
+}
+
+.btn:active{
+  transform: translateY(1px);
+}
+
+.btn-accent{
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.btn-accent:hover{
+  filter: brightness(0.95);
+}
+
+.btn-outline-light{
+  border-color: rgba(15,23,42,0.18) !important;
+  color: rgba(15,23,42,0.78) !important;
+  background: #fff !important;
+}
+.btn-outline-light:hover{
+  background: rgba(15,23,42,0.06) !important;
+  color: var(--text) !important;
+}
+
+.btn-outline-danger{
+  border-color: rgba(220,38,38,0.40) !important;
+}
+
+/* =============== */
+/* Badges          */
+/* =============== */
+
+.badge-soft{
+  background: rgba(14,165,233,.12);
+  border: 1px solid rgba(14,165,233,.22);
+  color: rgba(15,23,42,0.86);
+}
+
+.badge.text-bg-warning{
+  color: #111827 !important;
+}
+
+/* =============== */
+/* Forms           */
+/* =============== */
+
+input, select, textarea{
+  border-radius: var(--radius-sm) !important;
+  border-color: rgba(15,23,42,0.18) !important;
+}
+
+.form-control:focus, .form-select:focus, textarea:focus{
+  border-color: rgba(22,163,74,0.45) !important;
+  box-shadow: var(--ring) !important;
+}
+
+/* Optional: blue focus for search fields (if you add class later) */
+.focus-blue:focus{
+  box-shadow: var(--ring-blue) !important;
+}
+
+/* Django errors look clean */
+.is-invalid, .errorlist + input, .errorlist + select{
+  border-color: rgba(220,38,38,0.55) !important;
+}
+.invalid-feedback, .errorlist{
+  color: var(--danger);
+  margin-top: .35rem;
+  font-size: .9rem;
+}
+
+/* =============== */
+/* Tables          */
+/* =============== */
+
+.table.app-table{
+  color: var(--text);
+}
+
+.table.app-table thead th{
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  background: rgba(243,246,251,0.7);
+}
+
+.table.app-table td, .table.app-table th{
+  border-top: 1px solid rgba(15,23,42,0.08);
+}
+
+/* Better readability */
+.table.app-table tbody tr{
+  transition: background .12s ease;
+}
+.table.app-table tbody tr:hover{
+  background: rgba(22,163,74,0.06);
+}
+
+/* =============== */
+/* Progress bars   */
+/* =============== */
+
+.progress{
+  background: rgba(15,23,42,0.08);
+  border: 1px solid rgba(15,23,42,0.10);
+  border-radius: 999px;
+  height: 12px;
+}
+
+.progress-bar{
+  border-radius: 999px;
+  animation: growBar 900ms ease-out;
+}
+
+@keyframes growBar{
+  from { width: 0%; }
+}
+
+/* =============== */
+/* Alerts          */
+/* =============== */
+
+.alert{
+  border-radius: var(--radius-sm);
+}
+
+/* =============== */
+/* Footer          */
+/* =============== */
+
+footer{
+  color: var(--muted);
+}
+
+
+
+/* ================= AUTH GLASS ================= */
+
+.auth-card {
+  background: rgba(255,255,255,0.65);
+  backdrop-filter: blur(18px);
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.15);
+}
+
+.auth-title {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.auth-input {
+  background: rgba(255,255,255,0.75) !important;
+  border-radius: 14px !important;
+  padding: 10px 14px !important;
+}
+
+.auth-btn {
+  background: var(--accent);
+  border: none;
+  border-radius: 14px;
+  padding: 10px;
+  font-weight: 500;
+}
+
+.auth-btn:hover {
+  filter: brightness(0.95);
+}
+
+
+.auth-card input {
+  height: 52px;
+  border-radius: 14px;
+}
+
+.auth-card label {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+
+
+/* Auth pages: force perfect alignment */
+.auth-card .form-control,
+.auth-card .form-select,
+.auth-card input,
+.auth-card select,
+.auth-card textarea {
+  width: 100% !important;
+  display: block !important;
+  height: 52px;
+  border-radius: 14px;
+  box-sizing: border-box;
+}
+
+/* Remove weird spacing if any old styles exist */
+.auth-card label {
+  display: block;
+}
+
+.auth-card .form-label {
+  margin-bottom: 6px;
+}
+
+

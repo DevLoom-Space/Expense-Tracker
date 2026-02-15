@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {% if form.instance.pk %}Edit Transaction{% else %}New Transaction{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-8">
+
+    <div class="card app-card p-4">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h1 class="h4 mb-0">
+          {% if form.instance.pk %}
+            <i class="bi bi-pencil-square me-2"></i>Edit Transaction
+          {% else %}
+            <i class="bi bi-plus-circle me-2"></i>New Transaction
+          {% endif %}
+        </h1>
+
+        <a class="btn btn-outline-light btn-sm" href="{% url 'transaction_list' %}">
+          <i class="bi bi-arrow-left me-1"></i>Back
+        </a>
+      </div>
+
+      <div class="border-top pt-3"></div>
+
+      {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+          {{ form.non_field_errors }}
+        </div>
+      {% endif %}
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        <div class="row g-3">
+
+          <div class="col-12 col-md-6">
+            <label class="form-label small text-muted-2">Wallet</label>
+            {{ form.wallet }}
+            {% if form.wallet.errors %}<div class="text-danger small mt-1">{{ form.wallet.errors }}</div>{% endif %}
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label small text-muted-2">Transaction Type</label>
+            {{ form.t_type }}
+            {% if form.t_type.errors %}<div class="text-danger small mt-1">{{ form.t_type.errors }}</div>{% endif %}
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label small text-muted-2">Amount</label>
+            {{ form.amount }}
+            {% if form.amount.errors %}<div class="text-danger small mt-1">{{ form.amount.errors }}</div>{% endif %}
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label small text-muted-2">Date</label>
+            {{ form.date }}
+            {% if form.date.errors %}<div class="text-danger small mt-1">{{ form.date.errors }}</div>{% endif %}
+          </div>
+
+          <div class="col-12 col-md-6">
+            <label class="form-label small text-muted-2">Category</label>
+            {{ form.category }}
+            {% if form.category.errors %}<div class="text-danger small mt-1">{{ form.category.errors }}</div>{% endif %}
+          </div>
+
+          <div class="col-12">
+            <label class="form-label small text-muted-2">Note (optional)</label>
+            {{ form.note }}
+            {% if form.note.errors %}<div class="text-danger small mt-1">{{ form.note.errors }}</div>{% endif %}
+          </div>
+
+        </div>
+
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <a href="{% url 'transaction_list' %}" class="btn btn-outline-light">
+            <i class="bi bi-x-circle me-1"></i>Cancel
+          </a>
+
+          <button type="submit" class="btn btn-accent">
+            <i class="bi bi-check-circle me-1"></i>
+            {% if form.instance.pk %}Update{% else %}Save{% endif %}
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
